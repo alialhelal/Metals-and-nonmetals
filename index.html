@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع اختبار العلوم - الفلزات واللافلزات</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles for the new theme */
+        body {
+            background-color: #f8fafc; /* A light gray background */
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .question-card {
+            transition: all 0.3s ease;
+        }
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .element-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-yellow-50 to-gray-100 min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2 space-x-reverse">
+                    <i class="fas fa-atom text-yellow-500 text-2xl"></i>
+                    <h1 class="text-xl font-bold text-gray-800">اختبار العلوم - الفلزات واللافلزات</h1>
+                </div>
+                <div id="navButtons" class="flex space-x-2 space-x-reverse">
+                    <button onclick="showLogin()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">
+                        <i class="fas fa-sign-in-alt ml-2"></i>تسجيل الدخول
+                    </button>
+                    <button onclick="showRegister()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition duration-300">
+                        <i class="fas fa-user-plus ml-2"></i>تسجيل جديد
+                    </button>
+                </div>
+                <div id="userMenu" class="hidden flex items-center space-x-2 space-x-reverse">
+                    <span id="welcomeText" class="text-gray-700"></span>
+                    <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300">
+                        <i class="fas fa-sign-out-alt ml-2"></i>تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-8">
+
+        <!-- Home Page -->
+        <div id="homePage" class="fade-in">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-gem text-yellow-500 ml-2"></i>
+                    مرحباً بك في عالم الفلزات واللافلزات
+                    <i class="fas fa-cubes text-gray-500 mr-2"></i>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8">اختبر معلوماتك حول المقارنة بين الفلزات واللافلزات</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-6 element-animation">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-gem text-yellow-500 text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold text-yellow-600">الفلزات</h3>
+                    </div>
+                    <ul class="text-gray-700 space-y-2">
+                        <li><i class="fas fa-check text-yellow-500 ml-2"></i>لها بريق ولمعان معدني</li>
+                        <li><i class="fas fa-check text-yellow-500 ml-2"></i>جيدة التوصيل للحرارة والكهرباء</li>
+                        <li><i class="fas fa-check text-yellow-500 ml-2"></i>قابلة للطرق والسحب</li>
+                        <li><i class="fas fa-check text-yellow-500 ml-2"></i>صلبة في درجة حرارة الغرفة (عدا الزئبق)</li>
+                        <li><i class="fas fa-check text-yellow-500 ml-2"></i>عالية الكثافة</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 element-animation">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-cubes text-gray-500 text-6xl mb-4"></i>
+                        <h3 class="text-2xl font-bold text-gray-600">اللافلزات</h3>
+                    </div>
+                    <ul class="text-gray-700 space-y-2">
+                        <li><i class="fas fa-times text-gray-500 ml-2"></i>ليس لها بريق معدني</li>
+                        <li><i class="fas fa-times text-gray-500 ml-2"></i>رديئة التوصيل للحرارة والكهرباء</li>
+                        <li><i class="fas fa-times text-gray-500 ml-2"></i>غير قابلة للطرق والسحب (هشة)</li>
+                        <li><i class="fas fa-times text-gray-500 ml-2"></i>توجد في حالات المادة الثلاث</li>
+                        <li><i class="fas fa-times text-gray-500 ml-2"></i>منخفضة الكثافة</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-lg text-gray-700 mb-6">قم بتسجيل الدخول أو إنشاء حساب جديد لبدء الاختبار</p>
+                <div class="flex justify-center space-x-4 space-x-reverse">
+                    <button onclick="showLogin()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg transition duration-300">
+                        <i class="fas fa-sign-in-alt ml-2"></i>تسجيل الدخول
+                    </button>
+                    <button onclick="showRegister()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-3 rounded-lg text-lg transition duration-300">
+                        <i class="fas fa-user-plus ml-2"></i>تسجيل جديد
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="loginPage" class="hidden fade-in">
+            <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-6">
+                    <i class="fas fa-sign-in-alt text-blue-500 text-4xl mb-4"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">تسجيل الدخول</h2>
+                </div>
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">اسم المستخدم</label>
+                        <input type="text" id="loginUsername" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">كلمة المرور</label>
+                        <input type="password" id="loginPassword" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        تسجيل الدخول
+                    </button>
+                </form>
+                <div class="text-center mt-4">
+                    <button onclick="showHome()" class="text-gray-500 hover:text-gray-700">العودة للصفحة الرئيسية</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Page -->
+        <div id="registerPage" class="hidden fade-in">
+            <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-6">
+                    <i class="fas fa-user-plus text-yellow-500 text-4xl mb-4"></i>
+                    <h2 class="text-2xl font-bold text-gray-800">تسجيل جديد</h2>
+                </div>
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">الاسم الكامل</label>
+                        <input type="text" id="registerName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">اسم المستخدم</label>
+                        <input type="text" id="registerUsername" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">كلمة المرور</label>
+                        <input type="password" id="registerPassword" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500">
+                    </div>
+                    <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                        إنشاء الحساب
+                    </button>
+                </form>
+                <div class="text-center mt-4">
+                    <button onclick="showHome()" class="text-gray-500 hover:text-gray-700">العودة للصفحة الرئيسية</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Page -->
+        <div id="quizPage" class="hidden fade-in">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-flask text-purple-500 ml-2"></i>
+                    اختبار الفلزات واللافلزات
+                </h2>
+                <div class="bg-white rounded-lg shadow-lg p-4 inline-block">
+                    <span class="text-lg font-bold">السؤال <span id="currentQuestionNum">1</span> من <span id="totalQuestions">10</span></span>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                        <div id="progressBar" class="bg-blue-500 h-2 rounded-full transition-all duration-300" style="width: 10%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="questionContainer" class="max-w-2xl mx-auto">
+                <!-- Questions will be dynamically loaded here -->
+            </div>
+
+            <div class="text-center mt-8">
+                <button id="nextButton" onclick="nextQuestion()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg transition duration-300 hidden">
+                    السؤال التالي <i class="fas fa-arrow-left mr-2"></i>
+                </button>
+                <button id="finishButton" onclick="finishQuiz()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg text-lg transition duration-300 hidden">
+                    إنهاء الاختبار <i class="fas fa-check mr-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div id="resultsPage" class="hidden fade-in">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-trophy text-yellow-500 ml-2"></i>
+                    نتائج الاختبار
+                </h2>
+            </div>
+
+            <div class="max-w-2xl mx-auto">
+                <div id="scoreCard" class="bg-white rounded-lg shadow-lg p-8 text-center mb-8">
+                    <!-- Score will be displayed here -->
+                </div>
+
+                <div id="detailedResults" class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">تفاصيل الإجابات</h3>
+                    <div id="answersReview">
+                        <!-- Detailed answers will be displayed here -->
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                     <button onclick="retakeQuiz()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg transition duration-300 ml-4">
+                        <i class="fas fa-redo ml-2"></i>إعادة الاختبار
+                    </button>
+                    <button onclick="showDashboard()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg text-lg transition duration-300">
+                        <i class="fas fa-home ml-2"></i>لوحة التحكم
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboardPage" class="hidden fade-in">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-tachometer-alt text-blue-500 ml-2"></i>
+                    لوحة التحكم
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-play-circle text-green-500 ml-2"></i>
+                        بدء اختبار جديد
+                    </h3>
+                    <p class="text-gray-600 mb-4">ابدأ اختباراً جديداً لتختبر معلوماتك حول الفلزات واللافلزات</p>
+                    <button onclick="startQuiz()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition duration-300">
+                        <i class="fas fa-play ml-2"></i>بدء الاختبار
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-chart-line text-blue-500 ml-2"></i>
+                        إحصائياتك
+                    </h3>
+                    <div id="userStats">
+                        <!-- User statistics will be displayed here -->
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-history text-purple-500 ml-2"></i>
+                    سجل الاختبارات السابقة
+                </h3>
+                <div id="quizHistory">
+                    <!-- Quiz history will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global Variables
+        let currentUser = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let quizStartTime = null;
+
+        // Quiz Questions about Metals and Non-metals
+        const questions = [
+            {
+                question: "أي من الخصائص التالية تعتبر من خصائص الفلزات؟",
+                options: ["رديئة التوصيل للكهرباء", "هشة وسهلة الكسر", "قابلة للطرق والسحب", "ليس لها بريق"],
+                correct: 2,
+                explanation: "الفلزات قابلة للطرق (تحويلها لصفائح) والسحب (تحويلها لأسلاك) بسبب قوة الرابطة الفلزية."
+            },
+            {
+                question: "ما هو العنصر الفلزي السائل الوحيد في درجة حرارة الغرفة؟",
+                options: ["البروم", "الزئبق", "الصوديوم", "الذهب"],
+                correct: 1,
+                explanation: "الزئبق هو الفلز الوحيد الذي يوجد في الحالة السائلة في درجة حرارة الغرفة العادية."
+            },
+            {
+                question: "أي من العناصر التالية يعتبر من اللافلزات؟",
+                options: ["الحديد", "الألومنيوم", "النحاس", "الكبريت"],
+                correct: 3,
+                explanation: "الكبريت هو عنصر لافلزي، يتميز بلونه الأصفر وهو صلب وهش في درجة حرارة الغرفة."
+            },
+            {
+                question: "خاصية التوصيل الجيد للحرارة والكهرباء هي ميزة لـ:",
+                options: ["الفلزات", "اللافلزات", "أشباه الفلزات", "الغازات النبيلة"],
+                correct: 0,
+                explanation: "الفلزات موصلات جيدة للحرارة والكهرباء بسبب وجود إلكترونات حرة الحركة في تركيبها."
+            },
+            {
+                question: "ماذا تسمى قابلية الفلز للتحول إلى أسلاك رفيعة؟",
+                options: ["الطرق", "السحب", "الصلابة", "اللمعان"],
+                correct: 1,
+                explanation: "خاصية السحب هي قدرة المادة على التشكل إلى أسلاك عند تعرضها لقوى الشد."
+            },
+            {
+                question: "أي مما يلي يصف مظهر معظم اللافلزات الصلبة؟",
+                options: ["لامع وبراق", "باهت وهش", "مرن وقوي", "سائل وشفاف"],
+                correct: 1,
+                explanation: "اللافلزات الصلبة مثل الكبريت والكربون تكون عادة باهتة المظهر وهشة (سهلة الكسر)."
+            },
+            {
+                question: "أي عنصر يستخدم في صناعة أسلاك الكهرباء لجودة توصيله؟",
+                options: ["الكربون", "الفسفور", "النحاس", "السيليكون"],
+                correct: 2,
+                explanation: "يستخدم النحاس على نطاق واسع في صناعة الأسلاك الكهربائية لأنه فلز موصل جيد للكهرباء وتكلفته معقولة."
+            },
+            {
+                question: "ما هي الحالة الفيزيائية الشائعة للافلزات في درجة حرارة الغرفة؟",
+                options: ["صلبة فقط", "سائلة فقط", "غازية فقط", "توجد في الحالات الثلاث (صلبة، سائلة، غازية)"],
+                correct: 3,
+                explanation: "اللافلزات متنوعة في حالتها الفيزيائية، فمنها الصلب (كالكربون) والسائل (كالبروم) والغازي (كالأكسجين)."
+            },
+            {
+                question: "البريق واللمعان هو خاصية مميزة لـ:",
+                options: ["اللافلزات", "الفلزات", "المركبات الأيونية", "جميع العناصر"],
+                correct: 1,
+                explanation: "الفلزات تتميز ببريقها المعدني الذي ينتج عن تفاعل الضوء مع الإلكترونات الحرة على سطحها."
+            },
+            {
+                question: "أي من التالي يعتبر شبه فلز (له خصائص بين الفلزات واللافلزات)؟",
+                options: ["الذهب", "الأكسجين", "السيليكون", "الصوديوم"],
+                correct: 2,
+                explanation: "السيليكون من أشباه الفلزات، فهو شبه موصل للكهرباء، وهذه الخاصية تجعله أساسياً في صناعة الإلكترونيات."
+            }
+        ];
+
+        // Initialize the application
+        function init() {
+            checkLoginStatus();
+            showHome();
+        }
+
+        // Page Navigation Functions
+        function showHome() {
+            hideAllPages();
+            document.getElementById('homePage').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            hideAllPages();
+            document.getElementById('loginPage').classList.remove('hidden');
+        }
+
+        function showRegister() {
+            hideAllPages();
+            document.getElementById('registerPage').classList.remove('hidden');
+        }
+
+        function showDashboard() {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+            hideAllPages();
+            document.getElementById('dashboardPage').classList.remove('hidden');
+            loadDashboard();
+        }
+
+        function hideAllPages() {
+            const pages = ['homePage', 'loginPage', 'registerPage', 'quizPage', 'resultsPage', 'dashboardPage'];
+            pages.forEach(page => {
+                document.getElementById(page).classList.add('hidden');
+            });
+        }
+
+        // Authentication Functions
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                updateNavigation();
+                showDashboard();
+                showMessage('تم تسجيل الدخول بنجاح!', 'success');
+            } else {
+                showMessage('اسم المستخدم أو كلمة المرور غير صحيحة', 'error');
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(u => u.username === username)) {
+                showMessage('اسم المستخدم موجود بالفعل', 'error');
+                return;
+            }
+
+            const newUser = {
+                id: Date.now(),
+                name,
+                username,
+                password,
+                registrationDate: new Date().toISOString(),
+                quizzes: []
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            updateNavigation();
+            showDashboard();
+            showMessage('تم إنشاء الحساب بنجاح!', 'success');
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateNavigation();
+            showHome();
+            showMessage('تم تسجيل الخروج بنجاح!', 'success');
+        }
+
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateNavigation();
+            }
+        }
+
+        function updateNavigation() {
+            const navButtons = document.getElementById('navButtons');
+            const userMenu = document.getElementById('userMenu');
+            const welcomeText = document.getElementById('welcomeText');
+
+            if (currentUser) {
+                navButtons.classList.add('hidden');
+                userMenu.classList.remove('hidden');
+                welcomeText.textContent = `مرحباً، ${currentUser.name}`;
+            } else {
+                navButtons.classList.remove('hidden');
+                userMenu.classList.add('hidden');
+            }
+        }
+
+        // Quiz Functions
+        function startQuiz() {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+            
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            quizStartTime = new Date();
+            
+            hideAllPages();
+            document.getElementById('quizPage').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                finishQuiz();
+                return;
+            }
+
+            const question = questions[currentQuestionIndex];
+            const container = document.getElementById('questionContainer');
+            
+            container.innerHTML = `
+                <div class="bg-white rounded-lg shadow-lg p-6 question-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">${question.question}</h3>
+                    <div class="space-y-3">
+                        ${question.options.map((option, index) => `
+                            <label class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
+                                <input type="radio" name="answer" value="${index}" class="ml-3" onchange="selectAnswer(${index})">
+                                <span class="text-gray-700">${option}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Update progress
+            document.getElementById('currentQuestionNum').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = questions.length;
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            // Hide/show buttons
+            document.getElementById('nextButton').classList.add('hidden');
+            document.getElementById('finishButton').classList.add('hidden');
+        }
+
+        function selectAnswer(selectedIndex) {
+            userAnswers[currentQuestionIndex] = selectedIndex;
+            
+            if (currentQuestionIndex === questions.length - 1) {
+                document.getElementById('finishButton').classList.remove('hidden');
+            } else {
+                document.getElementById('nextButton').classList.remove('hidden');
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function finishQuiz() {
+            const endTime = new Date();
+            const duration = Math.round((endTime - quizStartTime) / 1000); // in seconds
+            
+            let score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === questions[index].correct) {
+                    score++;
+                }
+            });
+
+            const quizResult = {
+                id: Date.now(),
+                date: endTime.toISOString(),
+                score: score,
+                totalQuestions: questions.length,
+                percentage: Math.round((score / questions.length) * 100),
+                duration: duration,
+                answers: userAnswers
+            };
+
+            // Save result to user data
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex].quizzes = users[userIndex].quizzes || [];
+                users[userIndex].quizzes.push(quizResult);
+                localStorage.setItem('users', JSON.stringify(users));
+                currentUser.quizzes = users[userIndex].quizzes;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+
+            showResults(quizResult);
+        }
+
+        function showResults(result) {
+            hideAllPages();
+            document.getElementById('resultsPage').classList.remove('hidden');
+
+            // Display score card
+            const scoreCard = document.getElementById('scoreCard');
+            const percentage = result.percentage;
+            let grade, color, icon;
+
+            if (percentage >= 90) {
+                grade = 'ممتاز';
+                color = 'text-green-500';
+                icon = 'fas fa-star';
+            } else if (percentage >= 80) {
+                grade = 'جيد جداً';
+                color = 'text-blue-500';
+                icon = 'fas fa-thumbs-up';
+            } else if (percentage >= 70) {
+                grade = 'جيد';
+                color = 'text-yellow-500';
+                icon = 'fas fa-smile';
+            } else if (percentage >= 60) {
+                grade = 'مقبول';
+                color = 'text-orange-500';
+                icon = 'fas fa-meh';
+            } else {
+                grade = 'يحتاج تحسين';
+                color = 'text-red-500';
+                icon = 'fas fa-frown';
+            }
+
+            scoreCard.innerHTML = `
+                <i class="${icon} ${color} text-6xl mb-4"></i>
+                <h3 class="text-2xl font-bold ${color} mb-2">${grade}</h3>
+                <div class="text-4xl font-bold text-gray-800 mb-2">${result.score}/${result.totalQuestions}</div>
+                <div class="text-xl ${color} mb-4">${percentage}%</div>
+                <div class="text-gray-600">
+                    <i class="fas fa-clock ml-1"></i>
+                    الوقت المستغرق: ${Math.floor(result.duration / 60)} دقيقة و ${result.duration % 60} ثانية
+                </div>
+            `;
+
+            // Display detailed answers
+            const answersReview = document.getElementById('answersReview');
+            answersReview.innerHTML = questions.map((q, index) => {
+                const userAnswer = result.answers[index];
+                const isCorrect = userAnswer === q.correct;
+                
+                return `
+                    <div class="mb-6 p-4 border rounded-lg ${isCorrect ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}">
+                        <div class="flex items-start mb-2">
+                            <i class="fas ${isCorrect ? 'fa-check-circle text-green-500' : 'fa-times-circle text-red-500'} ml-2 mt-1"></i>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-800 mb-2">السؤال ${index + 1}: ${q.question}</h4>
+                                <div class="text-sm text-gray-600 mb-2">
+                                    <strong>إجابتك:</strong> ${userAnswer !== undefined ? q.options[userAnswer] : 'لم تجب'}
+                                </div>
+                                ${!isCorrect ? `<div class="text-sm text-green-600 mb-2"><strong>الإجابة الصحيحة:</strong> ${q.options[q.correct]}</div>` : ''}
+                                <div class="text-sm text-gray-700 italic">${q.explanation}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        // Dashboard Functions
+        function loadDashboard() {
+            loadUserStats();
+            loadQuizHistory();
+        }
+
+        function loadUserStats() {
+            const statsContainer = document.getElementById('userStats');
+            const quizzes = currentUser.quizzes || [];
+            
+            if (quizzes.length === 0) {
+                statsContainer.innerHTML = '<p class="text-gray-600">لم تقم بأي اختبار بعد</p>';
+                return;
+            }
+
+            const totalQuizzes = quizzes.length;
+            const averageScore = Math.round(quizzes.reduce((sum, quiz) => sum + quiz.percentage, 0) / totalQuizzes);
+            const bestScore = Math.max(...quizzes.map(q => q.percentage));
+            const lastQuizDate = new Date(quizzes[quizzes.length - 1].date).toLocaleDateString('ar-SA');
+
+            statsContainer.innerHTML = `
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-500">${totalQuizzes}</div>
+                        <div class="text-sm text-gray-600">إجمالي الاختبارات</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-green-500">${averageScore}%</div>
+                        <div class="text-sm text-gray-600">المتوسط العام</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-yellow-500">${bestScore}%</div>
+                        <div class="text-sm text-gray-600">أفضل نتيجة</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-sm font-bold text-purple-500">${lastQuizDate}</div>
+                        <div class="text-sm text-gray-600">آخر اختبار</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadQuizHistory() {
+            const historyContainer = document.getElementById('quizHistory');
+            const quizzes = currentUser.quizzes || [];
+            
+            if (quizzes.length === 0) {
+                historyContainer.innerHTML = '<p class="text-gray-600">لا يوجد سجل اختبارات</p>';
+                return;
+            }
+
+            const sortedQuizzes = [...quizzes].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            historyContainer.innerHTML = `
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="text-right py-2 px-2">التاريخ</th>
+                                <th class="text-right py-2 px-2">النتيجة</th>
+                                <th class="text-right py-2 px-2">النسبة</th>
+                                <th class="text-right py-2 px-2">الوقت</th>
+                                <th class="text-right py-2 px-2">التقدير</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${sortedQuizzes.map(quiz => {
+                                const date = new Date(quiz.date).toLocaleDateString('ar-SA');
+                                const time = Math.floor(quiz.duration / 60) + ':' + String(quiz.duration % 60).padStart(2, '0');
+                                let grade = '';
+                                if (quiz.percentage >= 90) grade = 'ممتاز';
+                                else if (quiz.percentage >= 80) grade = 'جيد جداً';
+                                else if (quiz.percentage >= 70) grade = 'جيد';
+                                else if (quiz.percentage >= 60) grade = 'مقبول';
+                                else grade = 'يحتاج تحسين';
+                                
+                                return `
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-2 px-2">${date}</td>
+                                        <td class="py-2 px-2">${quiz.score}/${quiz.totalQuestions}</td>
+                                        <td class="py-2 px-2">${quiz.percentage}%</td>
+                                        <td class="py-2 px-2">${time}</td>
+                                        <td class="py-2 px-2">${grade}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Utility Functions
+        function showMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 ${
+                type === 'success' ? 'bg-green-500 text-white' :
+                type === 'error' ? 'bg-red-500 text-white' :
+                'bg-blue-500 text-white'
+            }`;
+            messageDiv.textContent = message;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.style.transform = 'translateX(100%)';
+                setTimeout(() => messageDiv.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize the application when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
